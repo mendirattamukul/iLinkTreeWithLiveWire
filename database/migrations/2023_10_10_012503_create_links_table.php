@@ -17,6 +17,7 @@ return new class extends Migration
         $table->string('url');
         $table->foreignId("user_id");
         $table->foreignId("category_id");
+        $table->boolean("isActive");
         $table->timestamps();
     });
     }

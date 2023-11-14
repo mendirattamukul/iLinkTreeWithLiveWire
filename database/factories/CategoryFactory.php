@@ -17,10 +17,10 @@ class CategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => "instagram",
-            'image'=>"instagram.png"
-            // 'name' => "facebook",
-            // 'image'=>"facebook.png"
+            // 'name' => "instagram",
+            // 'image'=>"instagram.png"
+            'name' => "facebook",
+            'image'=>"facebook.png"
 
         ];
     }

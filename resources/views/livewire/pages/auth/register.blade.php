@@ -17,10 +17,12 @@ new #[Layout('layouts.guest')] class extends Component
     public string $password = '';
 
     public string $password_confirmation = '';
+    public string $domain = '';
 
     public function register(): void
     {
         $validated = $this->validate([
+            'domain'=>['required', 'string', 'max:255'],
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'string', 'confirmed', Rules\Password::defaults()],
@@ -30,6 +32,7 @@ new #[Layout('layouts.guest')] class extends Component
 
         event(new Registered($user = User::create(
             [
+        'domain'=>   $validated['domain'],
         'name' =>  $validated['name'],
         'email' => $validated['email'],
         'slug'=> $validated['name'],
@@ -80,6 +83,14 @@ new #[Layout('layouts.guest')] class extends Component
 
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
+
+
+        <div class="mt-4">
+            <x-input-label for="domain" :value="__('Custom Domain')" />
+            <x-text-input wire:model="domain" id="domain" class="block mt-1 w-full" type="text" name="domain" required autofocus autocomplete="domain" />
+            <x-input-error :messages="$errors->get('domain')" class="mt-2" />
+        </div>
+
 
         <div class="flex items-center justify-end mt-4">
             <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}" wire:navigate>

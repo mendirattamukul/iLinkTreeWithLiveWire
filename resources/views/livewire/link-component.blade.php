@@ -1,19 +1,39 @@
-<div class="flex justify-center">
-<div class="mt-2 w-4/5">
-  <div class="rounded grid justify-items-center" style="height:15rem;overflow:hidden;background-color:#5F9EA0;">
-    <div class="" >
-        <img src="/images/default.png"  class="rounded-full p-2" width="200rem" alt="user"></img>
-   </div>
-        <h3 class="text-white">{{$username}}</h3>
+<div class=" w-full flex justify-center h-full">
+    <div class=" w-full relative">
+        <div class="absolute top-2 right-2">
+            <div class=" h-9 w-9 bg-gray-100 rounded-full grid  place-content-center hover:bg-gray-200 cursor-pointer">
+                <p class=" font-bold">...</p>
+            </div>
+        </div>
+
+
+        <div class="flex justify-center mt-5">
+            <div class=" h-20 w-20 bg-gray-600 grid place-content-center rounded-full">
+                <h1 class="text-white text-4xl font-bold">{{$ProfileInitial}}</h1>
+            </div>
+        </div>
+        <div class="mt-4 flex justify-center">
+            <h1 class="text-2xl font-bold">@ {{$username}}</h1>
+        </div>
+
+        <div class=" mt-6 w-full">
+            @foreach ($links as $link)
+            <div class="flex justify-center ">
+                <a target="_blank" href="{{$link->url}}"
+                    class="bg-white w-3/4  hover:bg-gray-100 mt-2   p-4  font-semibold hover:p-5 hover:font-bold cursor-pointer rounded">
+                    {{$link->title}}
+                </a>
+            </div>
+            @endforeach
+        </div>
+
+
+        <div class="bottom-5 left-0 right-0 m-auto absolute">
+            <a href="/" class="flex justify-center">
+                <img src="{{asset('linktreeicon.png')}}" class=" w-7 h-7"></img>
+                <h1 class="ml-3 text-2xl font-extrabold">iLinkTree</h1>
+            </a>
+        </div>
+
     </div>
-    
-    <div class="grid justify-items-center mt-5">
-      @foreach ($links as $link)
-      <a  class="flex text-white hover:bg-green-800  bg-green-700 mt-2 w-full rounded p-2"  target="_blank" href="{{$link->url}}">
-      <img src="{{asset($link->category->image)}}" width="25rem" alt="category"/>
-      {{$link->title}}</a>
-     </a>
-      @endforeach
-      {{$links->links(data: ['scrollTo' => false])}}
-</div>
 </div>

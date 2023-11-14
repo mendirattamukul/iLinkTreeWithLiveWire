@@ -28,11 +28,13 @@ class AddLinkForm extends Component
                     "title"=>$this->title,
                     "url"=>$this->url,
                     "category_id"=>$this->category_id,
-                    "user_id"=>request()->user()->id
+                    "user_id"=>request()->user()->id,
+                    "isActive"=>true
                 ]);
             
                 $this->reset();
-                request()->session()->flash("success","Link Added Successfully");
                 $this->dispatch('link-added');
+                request()->session()->flash("success","Link Added Successfully");
+               
     }
 }

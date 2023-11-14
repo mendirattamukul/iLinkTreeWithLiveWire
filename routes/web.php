@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Livewire\LinkComponent;
-
+use App\Http\Controllers\welcome;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,7 +14,7 @@ use App\Livewire\LinkComponent;
 |
 */
 
-Route::view('/', 'welcome');
+Route::get('/', [welcome::class,'index']);
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
@@ -23,7 +23,6 @@ Route::view('dashboard', 'dashboard')
 Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
-    
 Route::get('/links/{slug}',LinkComponent::class);
 
 require __DIR__.'/auth.php';
