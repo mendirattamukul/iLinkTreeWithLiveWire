@@ -11,10 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users',function($table)
-        {
-            $table->string('domain')->unique();
-        });
+        if (!Schema::hasColumn('users', 'domain'))
+         {
+            Schema::table('users', function ($table) {
+                $table->string('domain')->unique()->nullable();
+          
+              });
+         }
+        
+       
     }
 
     /**
@@ -22,9 +27,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('users',function($table)
-        {
+        Schema::table('users', function ($table) {
             $table->dropColumn('domain');
+          
         });
     }
 };
